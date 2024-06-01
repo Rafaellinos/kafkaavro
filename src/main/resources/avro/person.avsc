@@ -1,0 +1,10 @@
+{
+  "type": "record",
+  "namespace": "br.com.rafaellino",
+  "name": "Person",
+  "fields": [
+    { "name": "first_name", "type": "string", "doc": "First Name" },
+    { "name": "last_name", "type": "string", "doc": "Last Name" },
+    { "name": "age", "type": "int", "doc": "Age at the time of registration" }
+  ]
+}
