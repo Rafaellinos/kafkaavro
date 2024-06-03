@@ -10,9 +10,10 @@ spring:
           brokers: localhost:9092
           auto-create-topics: true
           configuration:
-            default:
-              key.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
-              value.serde: br.com.rafaellino.kafkaavro.serdes.PersonSerde
+            "[key.serializer]": org.apache.kafka.common.serialization.Serdes$StringSerde
+            "[value.serializer]": br.com.rafaellino.kafkaavro.serdes.PersonSerde
+            "[key.deserializer]": org.apache.kafka.common.serialization.Serdes$StringSerde
+            "[value.deserializer]": br.com.rafaellino.kafkaavro.serdes.PersonSerde
       bindings:
         produceString-out-0:
           destination: topic-request-1
@@ -22,6 +23,6 @@ spring:
           destination: topic-request-1
           content-type: application/*+avro
           group: consumer-group
-#logging:
-#  level:
-#    root: debug
+logging:
+  level:
+    root: debug
