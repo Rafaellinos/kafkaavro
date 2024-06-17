@@ -12,7 +12,7 @@ import java.util.function.Consumer;
 public class ConsumerConfig {
 
   @Bean
-  public Consumer<Person> consumerMessage() {
+  public Consumer<Person> consumePerson() {
     return (p) -> {
       log.info("consumindo pessoa {}", p);
       System.out.println(p);

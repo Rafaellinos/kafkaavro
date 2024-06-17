@@ -1,0 +1,40 @@
+spring:
+  application:
+    name: "kafkaavro"
+  cloud:
+    function:
+      definition: producePerson;consumePerson
+    stream:
+      kafka:
+        binder:
+          brokers: 127.0.0.1:9092
+          auto-create-topics: true
+        bindings:
+          producePerson-out-0:
+            producer:
+              configuration:
+                use-native-encoding: true # ???
+                key.serializer: org.apache.kafka.common.serialization.StringSerializer
+                value.serializer: br.com.rafaellino.kafkaavro.serdes.PersonAvroSerializer
+          consumePerson-in-0:
+            consumer:
+              configuration:
+                use-native-decoding: true
+                key.deserializer: org.apache.kafka.common.serialization.StringDeserializer
+                value.deserializer: br.com.rafaellino.kafkaavro.serdes.PersonAvroDeserializer
+      bindings:
+        producePerson-out-0:
+          destination: topic-request-1
+          content-type: application/*+avro
+          group: producer-group
+          consumer:
+            use-native-decoding: true
+        consumePerson-in-0:
+          destination: topic-request-1
+          content-type: application/*+avro
+          group: consumer-group
+          consumer:
+            use-native-decoding: true
+logging:
+  level:
+    root: debug

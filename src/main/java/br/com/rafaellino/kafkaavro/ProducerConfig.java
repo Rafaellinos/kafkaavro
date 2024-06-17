@@ -12,8 +12,7 @@ import java.util.function.Supplier;
 @Slf4j
 public class ProducerConfig {
   @Bean
-  public Supplier<Person> produceString() {
-
+  public Supplier<Person> producePerson() {
     var a = new AtomicInteger();
     return () -> {
       Person p = new Person();
